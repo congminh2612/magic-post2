@@ -1,48 +1,46 @@
+import { Header } from "@/components/Shared/Header";
 import Leftbar from "@/components/Shared/Leftbar";
 import LeftbarManager from "@/components/Shared/Leftbar";
+import { Sidebar } from "@/components/Shared/Sidebar";
+import {
+  sideBarEmployeeTrans,
+  sideBarManageTransform,
+} from "@/components/Shared/Sidebar/constant";
 import Topbar from "@/components/Shared/Topbar";
 import { LeftbarLinkEmployeeTrans } from "@/contants/sidebarlink";
 import { ClerkProvider } from "@clerk/nextjs";
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { usePathname } from "next/navigation";
 // import "@/a"
 
-
-
-export const metadata : Metadata = {
-    title: 'Magic Post',
-    description: 'A Next.js 13 Meta Threads Application',
-}
+export const metadata: Metadata = {
+  title: "Magic Post",
+  description: "A Next.js 13 Meta Threads Application",
+};
 
 interface Props {
-    children : React.ReactNode;
+  children: React.ReactNode;
 }
 
-const inter = Inter({subsets:["latin"]})
+const inter = Inter({ subsets: ["latin"] });
 
-
-function RootLayout({children}: Props) {
-    const pathnameroot = '/employeeTrans'
-    return (
-        <>
-        <html lang="en">
-                <body className={`${inter.className} `}>
-                    <Topbar/>
-                    <main className="flex flex-row">
-                        <Leftbar sidebarlink={LeftbarLinkEmployeeTrans} pathnameRoot={pathnameroot}/>
-                        <section className='main-container'>
-                            <div className='w-full '>
-                                {children}
-                            </div>
-                        </section>
-                        {/* <RightbarCustomer/> */}
-                    </main>
-                </body>
-            </html>
-        </>
-    )
+function RootLayout({ children }: Props) {
+  const pathnameroot = "/employeeTrans";
+  return (
+    <>
+      <html lang="en">
+        <body className={`${inter.className} `}>
+          <Header />
+          <div className="float-left">
+            <Sidebar data={sideBarEmployeeTrans} />
+          </div>
+          {children}
+        </body>
+      </html>
+    </>
+  );
 }
-
 
 export default RootLayout;
